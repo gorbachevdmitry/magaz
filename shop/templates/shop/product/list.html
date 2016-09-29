@@ -1,0 +1,60 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% load static from staticfiles %}
+
+{% block title %}
+  {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+    <main>
+    <div class="container">
+    <!--Main layout-->
+    {% for product in products %}
+
+<div class="col-lg-4 col-md-6 m-b-r wow fadeInDown" data-wow-delay="0.4s">
+<div class="row">
+        <div class="col-md-12">
+<!--Card-->
+<div class="card card-cascade narrower">
+
+    <!--Card image-->
+    <div class="view overlay hm-white-slight ">
+        <img id="imsize" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="img-fluid" alt="">
+        <a  href="{{ product.get_absolute_url }}">
+            <div class="mask"></div>
+        </a>
+    </div>
+    <!--/.Card image-->
+
+    <!--Card content-->
+    <div class="card-block text-xs-center">
+        <!--Category & Title-->
+        <h5>Category</h5>
+        <h4 class="card-title"><strong><a href="">{{ product.name }}</a></strong></h4>
+
+        <!--Description-->
+        <p class="card-text">{{ product.description }}
+        </p>
+
+        <!--Card footer-->
+        <div class="card-footer">
+            <span class="left">${{ product.price }}</span>
+            <span class="right">
+<a class="" data-toggle="tooltip" data-placement="top" title="Quick Look"><i class="fa fa-eye"></i></a>
+<a class="" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><i class="fa fa-heart"></i></a>
+</span>
+        </div>
+
+    </div>
+    <!--/.Card content-->
+</div>
+        </div>
+        </div>
+
+<!--/.Card-->
+</div>
+    {% endfor %}
+    </div>
+    </main>
+{% endblock %}
